@@ -14,13 +14,13 @@ To display an image, add `!`: `![Model screenshot](../results/model.png)`.
 
 ## Setup
 
-- Member: **TODO**
-- OS: **TODO**
-- Setup diagnostic, viewer, and RGB results; any fix needed: **TODO**
-- Fork URL and working branch: **TODO**
+- Member: **Kevin Liu**
+- OS: **Windows 10**
+- Setup diagnostic, viewer, and RGB results; any fix needed: **All passed; no fix needed.**
+- Fork URL and working branch: **[TODO](https://github.com/joejoemallianjoe/BSRA-RL)**
 - Before starting, read the [toolchain overview](../resources/toolchain.md).
   What role does each of MuJoCo, Gymnasium, Stable-Baselines3, and TensorBoard
-  play in this exercise? Describe how they work together in your own words: **TODO**
+  play in this exercise? Describe how they work together in your own words: **MuJoCo handles the complex physics simulation logic and running it at a fast speed. Gymnasium handles the actual "MDP" part by standardizing the interaction between the environment and the agent (states, actions, rewards, dones, etc.). Stable-Baselines3 provides standard implementations for popular RL algorithms like PPO, DQN, etc. TensorBoard is responsible for providing an interface for statistics like loss, total episodic reward, etc.**
 
 ## Model and task
 
