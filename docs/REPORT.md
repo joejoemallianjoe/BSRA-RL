@@ -59,13 +59,13 @@ setting that supports your answer, and distinguish MuJoCo's role from Gymnasium'
 - Learning curve: **[Learning curve](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/learning-curve.png)** embed `../results/<run>/learning-curve.png`
 
 - What do SB3, PyTorch, and `Monitor` each do here? How does SB3 use the environment
-  and settings you pass to PPO? **SB3 provides the reinforcement learning algorithm implementaitons, which relies on PyTorch under the hood for the actual neural networks. Monitor is a wrapper for the environment that allows it to collect episode statistics like total reward and episode length. When SB3's PPO is initialized, SB3 receives the environment + hyperparameters. When model.learn() is called, SB3 automatically interacts with gym to collect observations, actions, rewards, and episode outcomes to train the policy.**
+and settings you pass to PPO? **SB3 provides the reinforcement learning algorithm implementaitons, which relies on PyTorch under the hood for the actual neural networks. Monitor is a wrapper for the environment that allows it to collect episode statistics like total reward and episode length. When SB3's PPO is initialized, SB3 receives the environment + hyperparameters. When model.learn() is called, SB3 automatically interacts with gym to collect observations, actions, rewards, and episode outcomes to train the policy.**
 - What do the curve's axes, averaging, and smoothing mean, and what evidence of
-  improvement, variability, or a plateau do you see? **The x-axis on each graph shown in the learning curve above represents environment steps, while the y axis represents mean episode length over the rollouts (top graph) and the mean total reward over the rollouts. There is a clear direct, positive increasing trend in improvement, with no evidence of a plateau yet. However, a plateau is to be expected as there will be a max amount a policy can learn once it reaches a local extrema.**
+improvement, variability, or a plateau do you see? **The x-axis on each graph shown in the learning curve above represents environment steps, while the y axis represents mean episode length over the rollouts (top graph) and the mean total reward over the rollouts. There is a clear direct, positive increasing trend in improvement, with no evidence of a plateau yet. However, a plateau is to be expected as there will be a max amount a policy can learn once it reaches a local extrema.**
 
 ## Evaluation
 
-Use reset seeds 10000–10019, deterministic PPO actions, and random action seeds
+ Use reset seeds 10000–10019, deterministic PPO actions, and random action seeds
 `reset seed + 20000`. Standard deviations describe episodes (`ddof=0`).
 
 | Agent | Episodes | Return mean ± std | Length mean ± std | Time-limit fraction |
