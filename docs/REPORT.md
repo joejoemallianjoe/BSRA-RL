@@ -41,11 +41,11 @@ setting that supports your answer, and distinguish MuJoCo's role from Gymnasium'
 
 | Topic        | Question                                                                                                                                                | Your answer |
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| Observations | What are the four values returned to the policy, in order and with units? Where do those values come from, and how does `_get_obs()` assemble them?     | **TODO**    |
-| Actions      | What does the action control, what is its allowed range, and how does it reach the motor?                                                               | **TODO**    |
-| Physics      | Which tool computes motion from your XML model, and how does Gymnasium ask it to advance? How much simulated time passes per action?                    | **TODO**    |
-| Reset        | What does `reset_model()` change at the start of an episode? How are the starting values randomized, and what does using the same reset seed reproduce? | **TODO**    |
-| Reward       | What is the exact reward rule, which code computes it, and does it use the state before or after the action?                                            | **TODO**    |
+| Observations | What are the four values returned to the policy, in order and with units? Where do those values come from, and how does `_get_obs()` assemble them?     | **cart position, vertical angle of pole, cart linear velocity, pole angular velocity. _get_obs() returns an np array of self.data.qpos and self.data.qvel. These are obtained from the MuJoCo simulation.**    |
+| Actions      | What does the action control, what is its allowed range, and how does it reach the motor?                                                               | **The action space is a 1D continuous box in the range [-3, 3]. step(action) passes a control value to do_simulation --> _step_mujoco_simulation(ctrl, n_frames) which updates ctrl and advances the actual simulation mujoco.mj_step(self.model, self.data)**    |
+| Physics      | Which tool computes motion from your XML model, and how does Gymnasium ask it to advance? How much simulated time passes per action?                    | **gym step() --> do_simulation() --> _step_mujoco_simulation() --> mujoco.mj_step(...) (this is where motion is computed). 0.02 seconds / physics step * frame skip of 2 = 0.04 seconds / action.**    |
+| Reset        | What does `reset_model()` change at the start of an episode? How are the starting values randomized, and what does using the same reset seed reproduce? | **q_pos and q_vel are randomized based on self._reset_noise_scale. Using the same reset seed produces the same q_pos and q_vel numbers.**    |
+| Reward       | What is the exact reward rule, which code computes it, and does it use the state before or after the action?                                            | **After the action is taken, the new state is observed and checked to see if any state space values no longer finite or the |angle between the vertical and the pole| > 0.2. If healthy then +1 reward, otherwise 0.**    |
 
 - Environment test and random-rollout results; action-range warning: **TODO**
 
