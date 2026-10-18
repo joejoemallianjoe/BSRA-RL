@@ -1,0 +1,44 @@
+{
+  "run_name": "random-debug",
+  "seeds": [
+    10000,
+    10001,
+    10002
+  ],
+  "deterministic_policy": true,
+  "action_seed_offset": 20000,
+  "std_ddof": 0,
+  "task": {
+    "environment": "InvertedPendulum-v5",
+    "frame_skip": 2,
+    "max_episode_steps": 1000,
+    "reset_noise_scale": 0.01,
+    "files_sha256": {
+      "assets/cartpole.xml": "f1e8f75762d43289eb03047272e57ce76781b7e0c0b178310c2f04044837db2b",
+      "assets/scene.xml": "cf598ffbdf90c105977944168f73ab73d1a90ff33d5419833b9c069cf3a8330b",
+      "onboarding/env.py": "5cd9db459458aaa364bd27a13af4a41e3da8bce114811732003590d9a89598c1"
+    }
+  },
+  "versions": {
+    "python": "3.12.3",
+    "gymnasium": "1.2.3",
+    "mujoco": "3.6.0",
+    "stable-baselines3": "2.7.1",
+    "torch": "2.10.0+cpu",
+    "numpy": "2.4.2",
+    "tensorboard": "2.21.0",
+    "imageio-ffmpeg": "0.6.0"
+  },
+  "policy_sha256": null,
+  "results": {
+    "random": {
+      "episodes": 3,
+      "return_mean": 4.666666666666667,
+      "return_std": 0.4714045207910317,
+      "length_mean": 5.666666666666667,
+      "length_std": 0.4714045207910317,
+      "time_limit_fraction": 0.0
+    }
+  },
+  "video": null
+}
