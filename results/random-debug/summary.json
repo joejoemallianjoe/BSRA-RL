@@ -40,14 +40,5 @@
       "time_limit_fraction": 0.0
     }
   },
-  "video": {
-    "path": "videos/random-debug/episode-10000.mp4",
-    "seed": 10000,
-    "policy": "random",
-    "fps": 25,
-    "width": 640,
-    "height": 480,
-    "frames": 5,
-    "codec": "h264"
-  }
+  "video": null
 }
