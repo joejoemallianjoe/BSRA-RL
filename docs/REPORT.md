@@ -28,10 +28,10 @@ To display an image, add `!`: `![Model screenshot](../results/model.png)`.
 
 - Which tool loads `scene.xml` and its included `cartpole.xml`, and what does it
   create from them? Point to the loading call in `scripts/view_model.py`. Which
-  tool computes the motion you see in the viewer when a control is applied? **TODO**
+  tool computes the motion you see in the viewer when a control is applied? **The "model = mujoco.MjModel.from_xml_path(str(args.xml.resolve()))" line loads the MJCF files to create an MjModel object representing like the compiled simulation model. The view_model(model, args. control, args.seconds) passes off the control to onboarding/viewer.py where mujoco.mj_step(model, data) actually steps the simulation forward with the control applied.**
 - Which XML file owns the mechanism, and how does the include connect it to the
   scene? Explain the slide/hinge axes, unactuated pole, box half-extents, and
-  degrees versus radians. Link a small model screenshot (`../results/model.png`): **TODO**
+  degrees versus radians. Link a small model screenshot (`../results/model.png`): **scene.xml controls the environment like the world including the floor, the light, the camera, etc. cartpole.xml controls the cartpole. The slider joint acts on the cart, allowing movement only along the X-axis. The hinge joint acts on the pole, allowing only rotation around the Y-axis. The pole is unactuated because the CartPole task is to balance the pole. When defining the size attribute for a box geom, you need to provide half extents (e.g., length / 2, width / 2, height / 2) because MuJuCo has some weird optimizationw ith that. The actuator targets the slider instead of the pole. The <compiler angle="degree"/> specifies that the angles listed in the XML are in degrees. Note that MuJoCo ultimately converts everything to radians in the end though. Link: https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/model.png **
 
 ### Environment (Stage 3)
 
