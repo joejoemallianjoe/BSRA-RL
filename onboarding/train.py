@@ -72,7 +72,7 @@ def train(run_name: str, seed: int = 0, total_timesteps: int = 100_000, smoke: b
     env = Monitor(make_env())
     start = time.perf_counter()
     try:
-        model = PPO("MlpPolicy", device="cpu", seed=seed, tensorboard_log=str(log_dir), verbose=0, **settings)
+        model = PPO("MlpPolicy", env, device="cpu", seed=seed, tensorboard_log=str(log_dir), verbose=0, **settings)
         model.learn(total_timesteps=total_timesteps, tb_log_name="ppo")
 
         policy_path.parent.mkdir(parents=True, exist_ok=True)
