@@ -69,16 +69,16 @@ Use reset seeds 10000–10019, deterministic PPO actions, and random action seed
 
 | Agent | Episodes | Return mean ± std | Length mean ± std | Time-limit fraction |
 | --- | --- | --- | --- | --- |
-| Random | TODO | TODO | TODO | TODO |
-| PPO | TODO | TODO | TODO | TODO |
+| Random | 20 | 4.8 +- 2.6570660511172846 | 5.8 +- 2.6570660511172846 | 0.0 |
+| PPO | 20 | 1000.0 +- 0.0 | 1000.0 +- 0.0 | 1.0 |
 
-- Per-episode CSV and summary JSON: **TODO** links
-- Predetermined PPO rollout (seed 10000): **TODO** briefly describe the behavior you observed
-- Limitation or failure, and a specific diagnosis if learning was weak: **TODO**
+- Per-episode CSV and summary JSON: **[Per-episode CSV](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/episodes.csv) [Summary JSON](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/summary.json)** links
+- Predetermined PPO rollout (seed 10000): **The policy briefly corrected the pole angle, moving to the right, and then it stood still forever, perfectly balancing the pole with 0 angular velocity...**
+- Limitation or failure, and a specific diagnosis if learning was weak: **Learning was not weak; PPO policy showed strong results, with 100% of the seeds ending by truncation (cuz it's just that cracked)**
 
 - Why does this evaluation differ from a training curve, and what can one
   trained seed not establish? What carries over to humanoid soccer, and what is
-  missing (for example, contacts, partial observations, or sim-to-real transfer)? **TODO**
+  missing (for example, contacts, partial observations, or sim-to-real transfer)? **Validation is crucial because training curves can be deceiving. An agent can overfit onto specific seeds or environment setups and can happen to look like it is performing well. It can also get trapped in a suboptimal policy. Validating it on new seeds ensures that it is robust against different initial conditions. One training seed only establishes how well your algorithm performs on a specific seed. The resulting PPO policy can be much different on another training seed because it affects the explored states, actions taken, etc. What carries over to humanoid soccer is the core RL loop: Observe state --> take action --> receive reward and new state with policy pi. The same idea for validation applies too: test the agent's policy on new seeds and compare it to a random baseline OR a human baseline to see if it has measurable improvement, rather than relying on training curves alone. What's missing is definitely the sim-to-real transfer. The simulation doesn't perfectly model the real world, which can cause issues where it works well in simulation but it doesn't work well in the real world. Additionally, in humanoid soccer, there are multiple agents working together, and there are much more complex joints and geoms.**
 
 ## Review
 
