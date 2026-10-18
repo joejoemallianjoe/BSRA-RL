@@ -83,20 +83,48 @@ Use reset seeds 10000–10019, deterministic PPO actions, and random action seed
 
 ## Review
 
-**TODO:** Record exact setup, test, train, and evaluate commands, plus any rendering
-environment variable.
+**To reproduce setup:**
+```bash
+# Setup command
+# Install git, uv, fork and clone, the whole shebang then run uv sync
+uv sync
 
+# Test that XML files are correct
+uv run python scripts/view_model.py
+uv run python scripts/view_model.py --control 0.1 --seconds 1
+uv run python scripts/view_model.py --control -0.1 --seconds 1
+
+# To check the MuJoCo gym env
+uv run python -m pytest test/test_env.py
+uv run python scripts/evaluate.py --random-only --run-name random-debug --episodes 3 --trace
+uv run python scripts/evaluate.py --random-only --run-name random-debug --episodes 3 --video
+
+# Run final tests
+uv run python -m pytest test/
+
+# Train PPO
+uv run python scripts/train.py --run-name first-run --seed 0 --steps 100000
+
+# Evaluating trained policy and recording a video
+uv run python scripts/evaluate.py --policy models/first-run/policy.zip --run-name first-run --video
+```
 Keep the saved policy, TensorBoard logs, and rollout video locally and share them
 directly with the RL lead if requested. No file uploads, download links, or GitHub
 release are required for these files.
 
-- Automated test results: **TODO**
-- Manual model/render/video checks: **TODO**
+- Automated test results: **17 passed (1 warning about the control range being [-3.0 to 3.0])**
+- Manual model/render/video checks: **All passed:
+- 
+- MuJoco model: uv run python -m pytest test/test_model.py (2/2 tests passed)
+- Gym environment: uv run python -m pytest test/test_env.py (11/11 passed; 1 warning about control range)
+- Render: uv run python scripts/view_model.py -- cartpole appears with rail, floor, lighting, and camera
+- uv run python scripts/evaluate.py --random-only --run-name random-debug --episodes 3 --trace: trace prints results for 3 random episodes
+- uv run python scripts/evaluate.py --random-only --run-name random-debug --episodes 3 --video: video was generated**
 - Fork PR link and review notes (record merge in the PR): **TODO**
 
 ## Feedback
 
 - Did you learn anything from this onboarding? What was new, or what became
-  clearer? If little was new, say so: **TODO**
-- What improvements would make the onboarding easier to follow or more useful?
-  Mention any confusing instructions, missing background, or unnecessary work: **TODO**
+  clearer? If little was new, say so: **A LOT was new. I didn't know how MJCF or MuJoCo really worked or how git worked in general. I spent the most time on parts 1 and 2. The format of the instructions was a little confusing, since it was like a lot of shorthand and some parts were kinda out of order, but I did eventually get the flow of it. On the initial git setup part, I was definitely confused for a while since I didn't know what the difference was between a fork and branch was, or what a repository was and why we needed a remote and a local one and what the workflow was. I also got confused on the MJCF part since I wasn't really familiar with the idea of using a file to represent robots, but it definitely makes sense.**
+- What improvements would make the onboarding easier to follow or more useful? **I would say that in some sections it's a little bit confusing where the "start" point is since it seems out of order. I definitely felt this way when I saw the first section, since it's a lot of information and it would help to keep the part about explaining the purpose of the project and the overview and then jumping straight to like "first do this" and then gradually introduce stuff like "look for the TO-DOs inside the files and edit them," but idk maybe that's just me.**
+  Mention any confusing instructions, missing background, or unnecessary work: **I definitely felt a bit confused about what the uv stuff was for. I know it probably wasn't necessary for the project, but I sort of felt like I was executing commands without really understanding what was happening at the start. I did understand the later stuff though with MJCF, Tensorboard, SB3, etc.**
