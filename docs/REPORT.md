@@ -45,19 +45,22 @@ setting that supports your answer, and distinguish MuJoCo's role from Gymnasium'
 | Reset        | What does `reset_model()` change at the start of an episode? How are the starting values randomized, and what does using the same reset seed reproduce? | **q_pos and q_vel are randomized based on self._reset_noise_scale. Using the same reset seed produces the same q_pos and q_vel numbers.**    |
 | Reward       | What is the exact reward rule, which code computes it, and does it use the state before or after the action?                                            | **After the action is taken, the new state is observed and checked to see if any state space values no longer finite or the |angle between the vertical and the pole| > 0.2. If healthy then +1 reward, otherwise 0.**    |
 
-- Environment test and random-rollout results; action-range warning: **TODO**
+- Environment test and random-rollout results; action-range warning:
+- **test/testenv.py passed all 11 tests.**
+- **Random-rollout: Mean episode length was 5.67 steps (std. dev. of 0.47) and mean return was 4.67 (std.dev. 0.47). No episodes were truncated. Video generation was successful.**
+-  **Action-range warning: SB3 gave me a warning that the action space [-3, 3] was not normalized to [-1, 1] (but I kept it as [-3, 3]).**
 
 ## Training
 
-- Run name / source commit / training seed: **TODO**
-- Requested and actual steps / elapsed time / device: **TODO**
-- Configuration and versions: **TODO** link `../results/<run>/run.json`
-- Learning curve: **TODO** embed `../results/<run>/learning-curve.png`
+- Run name / source commit / training seed: **first-run / 9143c17 / 0**
+- Requested and actual steps / elapsed time / device: **requested: 100000 / actual: 100352 / elapsed_time: 231.42941495100968 / device: cpu**
+- Configuration and versions: **[Link here](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/run.json)** link `../results/<run>/run.json`
+- Learning curve: **[TODO](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/learning-curve.png)** embed `../results/<run>/learning-curve.png`
 
 - What do SB3, PyTorch, and `Monitor` each do here? How does SB3 use the environment
-  and settings you pass to PPO? **TODO**
+  and settings you pass to PPO? **SB3 provides the reinforcement learning algorithm implementaitons, which relies on PyTorch under the hood for the actual neural networks. Monitor is a wrapper for the environment that allows it to collect episode statistics like total reward and episode length. When SB3's PPO is initialized, SB3 receives the environment + hyperparameters. When model.learn() is called, SB3 automatically interacts with gym to collect observations, actions, rewards, and episode outcomes to train the policy.**
 - What do the curve's axes, averaging, and smoothing mean, and what evidence of
-  improvement, variability, or a plateau do you see? **TODO**
+  improvement, variability, or a plateau do you see? **The x-axis on each graph shown in the learning curve above represents environment steps, while the y axis represents mean episode length over the rollouts (top graph) and the mean total reward over the rollouts. There is a clear direct, positive increasing trend in improvement, with no evidence of a plateau yet. However, a plateau is to be expected as there will be a max amount a policy can learn once it reaches a local extrema.**
 
 ## Evaluation
 
