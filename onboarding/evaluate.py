@@ -24,7 +24,7 @@ VIDEO_SEED = EVALUATION_SEEDS[0]
 def load_policy(path: str | Path) -> PPO:
     """Load on CPU without resuming training."""
 
-    return PPO.load(path, device="CPU")
+    return PPO.load(path, device="cpu")
 
 def choose_action(env: gym.Env, observation: NDArray[np.float64], policy: PPO | None) -> NDArray[np.float32]:
     if policy is None:
