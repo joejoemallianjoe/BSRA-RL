@@ -120,7 +120,7 @@ release are required for these files.
 - Render: uv run python scripts/view_model.py -- cartpole appears with rail, floor, lighting, and camera
 - uv run python scripts/evaluate.py --random-only --run-name random-debug --episodes 3 --trace: trace prints results for 3 random episodes
 - uv run python scripts/evaluate.py --random-only --run-name random-debug --episodes 3 --video: video was generated**
-- Fork PR link and review notes (record merge in the PR): **TODO**
+- Fork PR link and review notes (record merge in the PR): **[PR](https://github.com/joejoemallianjoe/BSRA-RL/pull/1) All tests passed. Verified custom CartPole model, environment, PPO training and evaluation pipeline, and report. Seed-1000 rollout video was also checked. Merged into main.**
 
 ## Feedback
 
