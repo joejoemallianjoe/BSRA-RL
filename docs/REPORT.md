@@ -17,7 +17,7 @@ To display an image, add `!`: `![Model screenshot](../results/model.png)`.
 - Member: **Kevin Liu**
 - OS: **Windows 10**
 - Setup diagnostic, viewer, and RGB results; any fix needed: **All passed; no fix needed.**
-- Fork URL and working branch: **[TODO](https://github.com/joejoemallianjoe/BSRA-RL)**
+- Fork URL and working branch: **[Fork URL](https://github.com/joejoemallianjoe/BSRA-RL)**
 - Before starting, read the [toolchain overview](../resources/toolchain.md).
   What role does each of MuJoCo, Gymnasium, Stable-Baselines3, and TensorBoard
   play in this exercise? Describe how they work together in your own words: **MuJoCo handles the complex physics simulation logic and running it at a fast speed. Gymnasium handles the actual "MDP" part by standardizing the interaction between the environment and the agent (states, actions, rewards, dones, etc.). Stable-Baselines3 provides standard implementations for popular RL algorithms like PPO, DQN, etc. TensorBoard is responsible for providing an interface for statistics like loss, total episodic reward, etc.**
@@ -31,7 +31,7 @@ To display an image, add `!`: `![Model screenshot](../results/model.png)`.
   tool computes the motion you see in the viewer when a control is applied? **The "model = mujoco.MjModel.from_xml_path(str(args.xml.resolve()))" line loads the MJCF files to create an MjModel object representing like the compiled simulation model. The view_model(model, args. control, args.seconds) passes off the control to onboarding/viewer.py where mujoco.mj_step(model, data) actually steps the simulation forward with the control applied.**
 - Which XML file owns the mechanism, and how does the include connect it to the
   scene? Explain the slide/hinge axes, unactuated pole, box half-extents, and
-  degrees versus radians. Link a small model screenshot (`../results/model.png`): **scene.xml controls the environment like the world including the floor, the light, the camera, etc. cartpole.xml controls the cartpole. The slider joint acts on the cart, allowing movement only along the X-axis. The hinge joint acts on the pole, allowing only rotation around the Y-axis. The pole is unactuated because the CartPole task is to balance the pole. When defining the size attribute for a box geom, you need to provide half extents (e.g., length / 2, width / 2, height / 2) because MuJuCo has some weird optimizationw ith that. The actuator targets the slider instead of the pole. The <compiler angle="degree"/> specifies that the angles listed in the XML are in degrees. Note that MuJoCo ultimately converts everything to radians in the end though. Link: https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/model.png **
+  degrees versus radians. Link a small model screenshot (`../results/model.png`): **scene.xml controls the environment like the world including the floor, the light, the camera, etc. cartpole.xml controls the cartpole. The slider joint acts on the cart, allowing movement only along the X-axis. The hinge joint acts on the pole, allowing only rotation around the Y-axis. The pole is unactuated because the CartPole task is to balance the pole. When defining the size attribute for a box geom, you need to provide half extents (e.g., length / 2, width / 2, height / 2) because MuJuCo has some weird optimizationw ith that. The actuator targets the slider instead of the pole. The <compiler angle="degree"/> specifies that the angles listed in the XML are in degrees. Note that MuJoCo ultimately converts everything to radians in the end though. [model screeenshot](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/model.png)**
 
 ### Environment (Stage 3)
 
@@ -55,8 +55,8 @@ setting that supports your answer, and distinguish MuJoCo's role from Gymnasium'
 
 - Run name / source commit / training seed: **first-run / 9143c17 / 0**
 - Requested and actual steps / elapsed time / device: **requested: 100000 / actual: 100352 / elapsed_time: 231.42941495100968 / device: cpu**
-- Configuration and versions: **[Link here](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/run.json)** link `../results/<run>/run.json`
-- Learning curve: **[TODO](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/learning-curve.png)** embed `../results/<run>/learning-curve.png`
+- Configuration and versions: **[Link](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/run.json)** link `../results/<run>/run.json`
+- Learning curve: **[Learning curve](https://github.com/joejoemallianjoe/BSRA-RL/blob/onboarding/cartpole/results/first-run/learning-curve.png)** embed `../results/<run>/learning-curve.png`
 
 - What do SB3, PyTorch, and `Monitor` each do here? How does SB3 use the environment
   and settings you pass to PPO? **SB3 provides the reinforcement learning algorithm implementaitons, which relies on PyTorch under the hood for the actual neural networks. Monitor is a wrapper for the environment that allows it to collect episode statistics like total reward and episode length. When SB3's PPO is initialized, SB3 receives the environment + hyperparameters. When model.learn() is called, SB3 automatically interacts with gym to collect observations, actions, rewards, and episode outcomes to train the policy.**
